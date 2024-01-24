@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Listado Productos</title>
+    <meta charset="UTF-8">
+    <!-- Agregar los enlaces a Bootstrap y FontAwesome si no están ya incluidos -->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"> -->
+</head>
+
+<body>
+    <section th:fragment="listadoProductos" id="productos">
+        <div class="container">
+            <div class="row">
+                <!-- Utilizamos un bucle th:each para generar una tarjeta por cada producto -->
+                <div class="col-md-9" th:each="producto : ${productos}">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4 th:text="${producto.nombre}"></h4>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/carrito}" method="POST">
+                            <p th:text="'Id: ' + ${producto.idProducto}"></p>
+                            <p th:text="'Descripción: ' + ${producto.descripcion}"></p>
+                            <p
+                                th:text="'Precio: ' + ${new java.text.DecimalFormat('$#,##0.00').format(producto.precio)}">
+                            </p>
+                            <p th:text="'Stock: ' + ${producto.stock}"></p>
+
+                            <button type="submit"  class="btn btn-dark">Añadir al carrito </button>
+                        </form>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${producto.idProducto}"
+                                class="btn btn-primary">
+                                <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
+                            </a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')"
+                                th:href="@{/eliminar(idProducto=${producto.idProducto})}" class="btn btn-primary">
+                                <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center bg-warning text-black mb-3">
+                        <div class="card-body">
+                            <h3 th:text="#{producto.stockTotal}">Stock total</h3>
+                            <h4 class="display-4">
+                                [[${stockTotal}]]
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="card text-center bg-warning text-black mb-3">
+                        <div class="card-body">
+                            <h3 th:text="#{producto.totalProductos}">Productos Total</h3>
+                            <h4 class="display-4">
+                                <i class="fas fa-users"></i> [[${totalProductos}]]
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Código de los contadores de stock total y total de productos -->
+</body>
+
+</html>
