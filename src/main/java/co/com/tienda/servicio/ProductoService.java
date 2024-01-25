@@ -1,6 +1,6 @@
 package co.com.tienda.servicio;
 
-import java.util.List;
+import java.util.*;
 
 import co.com.tienda.domain.Producto;
 
@@ -13,4 +13,6 @@ public interface ProductoService {
     public void eliminar(Producto producto);
     
     public Producto encontrarProducto(Producto producto);
+
+    //public Optional<Producto> get(Long id);
 }

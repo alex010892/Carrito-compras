@@ -22,13 +22,19 @@
                         </div>
                         <div class="card-body">
                             <form th:action="@{/carrito}" method="POST">
+                            <input type="hidden" th:value="${producto.idProducto}" name="idProducto">
                             <p th:text="'Id: ' + ${producto.idProducto}"></p>
                             <p th:text="'Descripción: ' + ${producto.descripcion}"></p>
                             <p
                                 th:text="'Precio: ' + ${new java.text.DecimalFormat('$#,##0.00').format(producto.precio)}">
                             </p>
                             <p th:text="'Stock: ' + ${producto.stock}"></p>
-
+                                                         
+                                <h6>
+                                  Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
+                                  min="1" max="5" value="1">
+                                </h6>
+                              
                             <button type="submit"  class="btn btn-dark">Añadir al carrito </button>
                         </form>
                             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${producto.idProducto}"

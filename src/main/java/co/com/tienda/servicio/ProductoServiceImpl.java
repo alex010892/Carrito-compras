@@ -1,6 +1,7 @@
 package co.com.tienda.servicio;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,4 +39,9 @@ public class ProductoServiceImpl implements ProductoService {
     public Producto encontrarProducto(Producto producto) {
         return productoDao.findById(producto.getIdProducto()).orElse(null);
     }
+
+    // @Override
+    // public Optional<Producto> get(Long id) {
+    //     return productoDao.findById(id);
+    // }
 }

@@ -1,5 +1,9 @@
 package co.com.tienda.web;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,7 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import co.com.tienda.domain.DetalleOrden;
+import co.com.tienda.domain.Orden;
 import co.com.tienda.domain.Producto;
 import co.com.tienda.servicio.ProductoService;
 
@@ -21,6 +28,10 @@ public class ControladorInicio {
     
     @Autowired
     private ProductoService productoService;
+
+    List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
+
+    Orden orden = new Orden();
     
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user){
@@ -65,7 +76,14 @@ public class ControladorInicio {
     }
 
     @PostMapping("/carrito")
-    public String addCarrito(){
+    public String addCarrito(Producto producto, Integer cantidad){
+        DetalleOrden detalleOrden = new DetalleOrden();
+        //Producto producto = new Producto();
+        double sumaTotal = 0;
+
+        producto = productoService.encontrarProducto(producto);
+        System.out.println("producto añadido: " + producto.toString());
+        System.out.println("cantidad: " + cantidad);
         return "carrito";
     }
 }
