@@ -75,8 +75,22 @@ public class ControladorInicio {
         return "redirect:/";
     }
 
+    // @GetMapping("/carrito")
+    // public String verCarrito(){
+    //     return "carrito";
+    // }
+
+    @GetMapping("/carrito")
+    public String verCarrito(Model model) {
+        // Puedes colocar aquí lógica adicional si es necesario antes de mostrar el carrito.
+        model.addAttribute("carrito", detalles); // Detalles se refiere a la lista de detalles del carrito.
+        model.addAttribute("orden", orden); // Orden se refiere al objeto de orden.
+
+        return "carrito"; // Devuelve el nombre de la plantilla que mostrará el carrito.
+    }
+
     @PostMapping("/carrito")
-    public String addCarrito(Producto producto, Integer cantidad){
+    public String addCarrito(Producto producto, Integer cantidad, Model model){
         DetalleOrden detalleOrden = new DetalleOrden();
         //Producto producto = new Producto();
         double sumaTotal = 0;
@@ -84,6 +98,22 @@ public class ControladorInicio {
         producto = productoService.encontrarProducto(producto);
         System.out.println("producto añadido: " + producto.toString());
         System.out.println("cantidad: " + cantidad);
+        //producto = producto.toString();
+
+        detalleOrden.setCantidad(cantidad);
+        detalleOrden.setPrecio(producto.getPrecio());
+        detalleOrden.setNombre(producto.getNombre());
+        detalleOrden.setTotal(producto.getPrecio() * cantidad);
+        detalleOrden.setProducto(producto);
+
+        detalles.add(detalleOrden);
+
+        sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+
+        orden.setTotal(sumaTotal);
+        model.addAttribute("carrito", detalles);
+        model.addAttribute("orden", orden);
+
         return "carrito";
     }
 }
