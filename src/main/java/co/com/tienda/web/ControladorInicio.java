@@ -75,6 +75,29 @@ public class ControladorInicio {
         return "redirect:/";
     }
 
+    @GetMapping("/eliminar/carrito/{idProducto}")
+    public String borrarProductoCarrito(Producto producto, Model model){
+        List<DetalleOrden> ordenesNuevas = new ArrayList<DetalleOrden>();
+
+        for(DetalleOrden detalleOrden : detalles){
+            if(detalleOrden.getProducto().getIdProducto() != producto.getIdProducto()){
+                ordenesNuevas.add(detalleOrden);
+            }
+        }
+
+        //poner la nueva lista con los productos restantes
+        detalles = ordenesNuevas;
+        double sumaTotal = 0;
+        sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+
+        orden.setTotal(sumaTotal);
+        model.addAttribute("carrito", detalles);
+        model.addAttribute("orden", orden);
+
+
+        return "carrito";
+    }
+
     // @GetMapping("/carrito")
     // public String verCarrito(){
     //     return "carrito";
@@ -106,7 +129,13 @@ public class ControladorInicio {
         detalleOrden.setTotal(producto.getPrecio() * cantidad);
         detalleOrden.setProducto(producto);
 
-        detalles.add(detalleOrden);
+        //validar que el producto no se añada 2 veces
+        Long idProducto = producto.getIdProducto();
+        boolean ingresado = detalles.stream().anyMatch(p -> p.getProducto().getIdProducto() == idProducto);
+
+        if(!ingresado){
+            detalles.add(detalleOrden);
+        }
 
         sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
 
