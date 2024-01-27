@@ -145,4 +145,9 @@ public class ControladorInicio {
 
         return "carrito";
     }
+
+    @GetMapping("/orden")
+    public String orden(){
+        return "resumenorden";
+    }
 }

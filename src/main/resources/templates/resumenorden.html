@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout/plantilla :: head">
+  <title>Inicio</title>
+</head>
+
+<body>
+
+  <header th:replace="layout/plantilla :: header"></header>
+
+  <!-- Page Content -->
+  <div class="container">
+
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+      Spring eCommerce <small>Resumen de la orden</small>
+    </h1>
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a th:href="@{/}">Seguir comprando</a></li>
+      <li class="breadcrumb-item active">Orden</li>
+    </ol>
+
+    <!-- Blog Post -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-9">
+            <div class="card-body">
+              <h5 class="card-title">
+                DATOS ORDEN
+              </h5>
+              <h6>Nombre: </h6>
+              <h6>Correo: </h6>
+              <h6>Dirección</h6>
+
+              <h5 class="card-title">
+                PRODUCTOS
+              </h5>
+              <div class="alert alert-light" role="alert">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Producto</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Nombre</td>
+                      <td>Precio</td>
+                      <td>Cantidad</td>
+                      <td>Total</td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="col-lg-3">
+            <h2 class="card-title">Resumen Orden</h2>
+
+            <ul class="list-group">
+              <li class="list-group-item">
+                <h5> Total:</h5>
+              </li>
+              <a href="#" class="btn btn-dark">Generar</a>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container -->
+  </div>
+  <!-- Footer -->
+  <footer th:replace="layout/plantilla :: footer"></footer>
+
+</body>
+
+</html>
