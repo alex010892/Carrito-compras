@@ -17,21 +17,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+//import co.com.tienda.domain.Cliente;
 import co.com.tienda.domain.DetalleOrden;
 import co.com.tienda.domain.Orden;
 import co.com.tienda.domain.Producto;
-import co.com.tienda.servicio.ProductoService;
+import co.com.tienda.domain.Usuario;
+import co.com.tienda.servicio.IUsuarioService;
+import co.com.tienda.servicio.IProductoService;
 
 @Controller
 @Slf4j
 public class ControladorInicio {
     
     @Autowired
-    private ProductoService productoService;
+    private IProductoService productoService;
+
+    @Autowired
+    private IUsuarioService usuarioService;
 
     List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 
     Orden orden = new Orden();
+
+    //Cliente cliente = new Cliente();
     
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user){
@@ -146,8 +154,31 @@ public class ControladorInicio {
         return "carrito";
     }
 
+    // @GetMapping("/orden")
+    // public String orden(Model model, Usuario usuario){
+
+    //     //usuario = usuarioService.encontrarUsuario(usuario);
+
+    //     model.addAttribute("carrito", detalles);
+    //     model.addAttribute("orden", orden);
+    //     model.addAttribute("usuario", usuario);
+    //     return "resumenorden";
+    // }
+
     @GetMapping("/orden")
-    public String orden(){
+    public String orden(Model model, Usuario usuario) {
+        // Obtener el usuario actual
+         usuario = usuarioService.encontrarUsuario();
+
+        // Lógica para obtener detalles del carrito y orden (sustituir por tu propia lógica)
+        //List<DetalleCarrito> detalles = obtenerDetallesOrden(); // Supongamos que tienes una función para obtener detalles del carrito
+        //Orden orden = obtenerOrden(); // Supongamos que tienes una función para obtener detalles de la orden
+
+        // Agregar atributos al modelo
+        model.addAttribute("carrito", detalles);
+        model.addAttribute("orden", orden);
+        model.addAttribute("usuario", usuario);
+
         return "resumenorden";
     }
 }

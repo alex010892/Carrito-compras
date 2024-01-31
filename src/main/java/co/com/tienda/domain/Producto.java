@@ -38,7 +38,7 @@ public class Producto implements Serializable{
     private int stock;
 
     @ManyToOne
-    private Cliente cliente;
+    private Usuario usuario;
 
     // @OneToMany
     // private DetalleOrden detalle; //es opcional colocar esto, se tendria que hacer un mapeo ...

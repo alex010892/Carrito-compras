@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.com.tienda.dao.ProductoDao;
+import co.com.tienda.dao.IProductoDao;
 import co.com.tienda.domain.Producto;
 
 @Service
-public class ProductoServiceImpl implements ProductoService {
+public class ProductoServiceImpl implements IProductoService {
 
     @Autowired
-    private ProductoDao productoDao;
+    private IProductoDao productoDao;
     
     @Override
     @Transactional(readOnly = true)

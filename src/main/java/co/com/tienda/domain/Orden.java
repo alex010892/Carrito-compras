@@ -30,7 +30,7 @@ public class Orden {
     private double total;
 
     @ManyToOne
-    private Cliente cliente;
+    private Usuario usuario;
 
     @OneToOne(mappedBy = "orden")   
     private DetalleOrden detalle;

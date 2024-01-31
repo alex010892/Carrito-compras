@@ -4,7 +4,7 @@ import java.util.*;
 
 import co.com.tienda.domain.Producto;
 
-public interface ProductoService {
+public interface IProductoService {
     
     public List<Producto> listarProductos();
     

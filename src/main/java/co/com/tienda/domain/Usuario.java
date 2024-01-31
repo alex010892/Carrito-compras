@@ -21,6 +21,18 @@ public class Usuario implements Serializable{
     
     @NotEmpty
     private String password;
+
+    private String nombre;
+
+    private String email;
+
+    private String direccion;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Orden> ordenes;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Producto> productos;
     
     @OneToMany
     @JoinColumn(name="id_usuario")
