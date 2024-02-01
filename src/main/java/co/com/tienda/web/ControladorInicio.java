@@ -1,8 +1,10 @@
 package co.com.tienda.web;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,8 @@ import co.com.tienda.domain.Orden;
 import co.com.tienda.domain.Producto;
 import co.com.tienda.domain.Usuario;
 import co.com.tienda.servicio.IUsuarioService;
+import co.com.tienda.servicio.IDetalleOrdenService;
+import co.com.tienda.servicio.IOrdenService;
 import co.com.tienda.servicio.IProductoService;
 
 @Controller
@@ -34,6 +38,12 @@ public class ControladorInicio {
 
     @Autowired
     private IUsuarioService usuarioService;
+
+    @Autowired
+    private IOrdenService ordenService;
+
+    @Autowired
+    private IDetalleOrdenService detalleOrdenService;
 
     List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 
@@ -180,5 +190,39 @@ public class ControladorInicio {
         model.addAttribute("usuario", usuario);
 
         return "resumenorden";
+    }
+
+    //guardar la orden
+    @GetMapping("/guardarOrden")
+    public String guardarOrden(){
+        Date fechaCreacion = new Date();
+        orden.setFechaCreacion(fechaCreacion);
+        orden.setNumero(ordenService.generarNumeroOrden());
+
+        //usuario
+        Usuario usuario = usuarioService.encontrarUsuario();
+         
+        orden.setUsuario(usuario);
+        ordenService.save(orden);
+
+        //guardar detalles
+        for(DetalleOrden dt: detalles){
+            dt.setOrden(orden);
+            detalleOrdenService.save(dt);
+        }
+
+        //limpiar lista y orden
+        orden = new Orden();
+        detalles.clear();
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/buscar")
+    public String buscarProducto(@RequestParam String nombre, Model model){ //la variable nombre debe ser igual a la variable name="" en la vista html en archivo plantilla.html, header, form, debe estar dentro de una form para enviar una petición Post
+    List<Producto> productos = productoService.listarProductos().stream().filter(p -> p.getNombre().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());
+    model.addAttribute("productos", productos);
+    log.info("Nombre del producto: {}", nombre);
+        return "index";
     }
 }

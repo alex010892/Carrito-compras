@@ -21,6 +21,12 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav">
+                            <form class="form-inline my-2 my-lg-0" method="post" th:action="@{/buscar}">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="nombre" 
+                                  autocomplete="off"> <!-- la variable name debe tener el mismo nombre que en el parametro del metodo post buscarProducto en el controlador-->
+                                <button class="btn btn-dark my-2 my-sm-0" type="submit">Buscar</button>
+                              </form>
+                        
                             <li class="nav-item px-2">
                                 <a th:href="@{/}" class="nav-link active" th:text="#{barra.titulo}">Inicio</a>
                             </li>
