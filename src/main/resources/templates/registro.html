@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout/plantilla :: head">
+  <title>Inicio</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" th:href="@{/}" th:text="#{plantilla.titulo}"></a>
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h2>Registro</h2>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <form th:action="@{/usuario/guardar}" method="post" >
+      <div class="form-group">
+        <label for="nombres">Nombres:</label> <input type="text" class="form-control" id="nombre" name="nombre" required
+          placeholder="Ingrese sus nombres" autocomplete="off" >
+      </div>
+
+      <div class="form-group">
+        <label for="username">User name:</label> <input type="text" class="form-control" id="username" name="username" required
+          placeholder="Ingrese su nombre de usuario" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label> <input type="email" class="form-control" id="email" name="email" required
+          placeholder="Ingrese su email" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label for="direccion">Dirección:</label> <input type="text" class="form-control" id="direccion"
+          name="direccion" required placeholder="Ingrese su dirección" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label for="pwd">Contraseña</label> <input type="password" class="form-control" id="password" name="password"
+          required placeholder="Ingrese su contraseña" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label for="rol">Rol</label> <input type="text" class="form-control" id="nombrerol" name="nombrerol"
+          required placeholder="Seleccione rol" autocomplete="off">
+      </div>
+
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-success">Guardar</button>
+      </div>
+    </form>
+
+  </div>
+
+  <!-- /.container -->
+
+
+  <!-- Footer -->
+  <footer th:replace="layout/plantilla :: footer"></footer>
+
+</body>
+
+</html>

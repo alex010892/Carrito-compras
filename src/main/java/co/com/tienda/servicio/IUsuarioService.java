@@ -6,4 +6,6 @@ import co.com.tienda.domain.Usuario;
 public interface IUsuarioService {
     
     public Usuario encontrarUsuario();
+
+    public Usuario guardar(Usuario usuario);
 }

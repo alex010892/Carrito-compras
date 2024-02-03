@@ -43,7 +43,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
         var roles = new ArrayList<GrantedAuthority>();
 
         for (Rol rol : usuario.getRoles()) {
-            roles.add(new SimpleGrantedAuthority(rol.getNombre()));
+            roles.add(new SimpleGrantedAuthority(rol.getNombrerol()));
         }
 
         return new User(usuario.getUsername(), usuario.getPassword(), roles);
@@ -63,6 +63,12 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 
         // Buscar y devolver el usuario por nombre de usuario
         return usuarioDao.findByUsername(username);
+    }
+
+    @Override
+    public Usuario guardar(Usuario usuario) {
+        // TODO Auto-generated method stub
+        return usuarioDao.save(usuario);
     }
 
 }

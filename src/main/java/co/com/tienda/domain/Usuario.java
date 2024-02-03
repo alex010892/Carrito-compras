@@ -28,13 +28,19 @@ public class Usuario implements Serializable{
 
     private String direccion;
 
+    private String nombrerol;
+
     @OneToMany(mappedBy = "usuario")
     private List<Orden> ordenes;
 
     @OneToMany(mappedBy = "usuario")
     private List<Producto> productos;
     
-    @OneToMany
-    @JoinColumn(name="id_usuario")
+    // @OneToMany
+    // @JoinColumn(name="id_usuario")
+    // private List<Rol> roles;
+
+    @OneToMany(mappedBy="usuario")
     private List<Rol> roles;
+
 }

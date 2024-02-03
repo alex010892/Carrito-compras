@@ -16,5 +16,12 @@ public class Rol implements Serializable{
     private Long idRol;
     
     @NotEmpty
-    private String nombre;
+    private String nombrerol;
+
+    // @ManyToOne
+    // private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;    
 }
