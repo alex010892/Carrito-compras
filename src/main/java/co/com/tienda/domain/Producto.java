@@ -37,6 +37,9 @@ public class Producto implements Serializable{
     @NotNull //notnull es para cualquier tipo diferente a String, notempty es para tipo String solamente
     private int stock;
 
+    @NotNull
+    private String foto;
+
     @ManyToOne
     private Usuario usuario;
 

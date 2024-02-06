@@ -15,44 +15,56 @@
         <div class="container">
             <div class="row">
                 <!-- Utilizamos un bucle th:each para generar una tarjeta por cada producto -->
-                <div class="col-md-9" th:each="producto : ${productos}">
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <h4 th:text="${producto.nombre}"></h4>
-                        </div>
+                <div class="col-md-3 mb-3" th:each="producto : ${productos}">
+                    <div class="card" style="height: 100%;">
+                        <!-- <div class="card-header"> -->
+                        <img th:src="${producto.foto}" class="card-img-top" alt="Imagen del producto"
+                        style="object-fit: cover; height: 300px;">
+                        <!-- </div> -->
                         <div class="card-body">
                             <form th:action="@{/carrito}" method="POST">
-                            <input type="hidden" th:value="${producto.idProducto}" name="idProducto">
-                            <p th:text="'Id: ' + ${producto.idProducto}"></p>
-                            <p th:text="'Descripción: ' + ${producto.descripcion}"></p>
-                            <p
-                                th:text="'Precio: ' + ${new java.text.DecimalFormat('$#,##0.00').format(producto.precio)}">
-                            </p>
-                            <p th:text="'Stock: ' + ${producto.stock}"></p>
-                                                         
+                                <div class="card-header text-center">
+                                    <h4 th:text="${producto.nombre}" style="font-size: 1.2rem;"></h4>
+                                </div>
+                                <input type="hidden" th:value="${producto.idProducto}" name="idProducto">
+                                <!-- <img class="card-img-top" src="http://placehold.it/100x75" alt=""> -->
+                                <!-- <p class="card-text" th:text="'Id: ' + ${producto.idProducto}"
+                                    style="font-size: 0.8rem;"></p> -->
+                                <p class="card-text" th:text="'Descripción: ' + ${producto.descripcion}"
+                                    style="font-size: 0.8rem;"></p>
+                                <p class="card-text font-weight-bold text-primary"
+                                    th:text="'Precio: ' + ${new java.text.DecimalFormat('$#,##0.00').format(producto.precio)}"
+                                    style="font-size: 1rem;">
+                                </p>
+                                <p class="card-text" th:text="'Stock: ' + ${producto.stock}" style="font-size: 0.8rem;">
+                                </p>
+
                                 <h6>
-                                  Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
-                                  min="1" max="5" value="1">
+                                    Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
+                                        min="1" max="5" value="1" style="font-size: 0.8rem;">
                                 </h6>
-                              
-                            <button type="submit"  class="btn btn-dark">Añadir al carrito </button>
-                        </form>
+
+                                <button type="submit" class="btn btn-dark btn-sm">Añadir al carrito </button>
+                                <br/><br/>
+                                
+                            </form>
                             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${producto.idProducto}"
-                                class="btn btn-primary">
-                                <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
-                            </a>
-                            <a sec:authorize="hasRole('ROLE_ADMIN')"
-                                th:href="@{/eliminar(idProducto=${producto.idProducto})}" class="btn btn-primary">
-                                <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
-                            </a>
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
+                                </a>
+                                <a sec:authorize="hasRole('ROLE_ADMIN')"
+                                    th:href="@{/eliminar(idProducto=${producto.idProducto})}"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
+                                </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card text-center bg-warning text-black mb-3">
                         <div class="card-body">
-                            <h3 th:text="#{producto.stockTotal}">Stock total</h3>
-                            <h4 class="display-4">
+                            <h3 th:text="#{producto.stockTotal}" style="font-size: 1.2rem;">Stock total</h3>
+                            <h4 class="display-4" style="font-size: 1.5rem;">
                                 [[${stockTotal}]]
                             </h4>
                         </div>
@@ -60,8 +72,8 @@
 
                     <div class="card text-center bg-warning text-black mb-3">
                         <div class="card-body">
-                            <h3 th:text="#{producto.totalProductos}">Productos Total</h3>
-                            <h4 class="display-4">
+                            <h3 th:text="#{producto.totalProductos}" style="font-size: 1.2rem;">Productos Total</h3>
+                            <h4 class="display-4" style="font-size: 1.5rem;">
                                 <i class="fas fa-users"></i> [[${totalProductos}]]
                             </h4>
                         </div>
