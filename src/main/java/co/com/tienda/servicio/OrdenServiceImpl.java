@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import co.com.tienda.dao.IOrdenDao;
 import co.com.tienda.domain.Orden;
+import co.com.tienda.domain.Usuario;
 
 @Service
 public class OrdenServiceImpl implements IOrdenService{
@@ -53,5 +54,11 @@ public class OrdenServiceImpl implements IOrdenService{
         }
 
         return numeroConcatenado;
+    }
+
+    @Override
+    public List<Orden> findByUsuario(Usuario usuario) {
+        // TODO Auto-generated method stub
+        return ordenDao.findByUsuario(usuario);
     }
 }

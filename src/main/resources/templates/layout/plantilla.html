@@ -47,6 +47,12 @@
                                 <span th:text="#{barra.carrito}">Carrito</span>
                             </a>
                         </li>
+                        <li class="nav-item mr-3">
+                            <a th:href="@{/usuario/compras}" class="nav-link">
+                                <!-- <i class="fas fa-shopping-cart"></i> -->
+                                <span th:text="#{barra.compras}">Compras</span>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <form method="POST" th:action="@{/logout}">
                                 <a href="#" onclick="this.parentNode.submit();" class="nav-link">
