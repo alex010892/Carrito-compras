@@ -92,4 +92,10 @@ public class UsuarioController {
         model.addAttribute("detalles", orden.get().getDetalle());
         return "detallecompra";
     }
+
+    @GetMapping("/usuarios")
+    public String usuarios(Model model){
+        model.addAttribute("usuarios", usuarioService.encontrarUsuarios());
+        return "usuarios";
+    }
 }

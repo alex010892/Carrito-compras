@@ -1,6 +1,8 @@
 package co.com.tienda.servicio;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,12 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
     public Usuario guardar(Usuario usuario) {
         // TODO Auto-generated method stub
         return usuarioDao.save(usuario);
+    }
+
+    @Override
+    public List<Usuario> encontrarUsuarios() {
+        // TODO Auto-generated method stub
+        return usuarioDao.findAll();
     }
 
 }

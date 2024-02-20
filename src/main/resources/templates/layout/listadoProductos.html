@@ -19,7 +19,7 @@
                     <div class="card" style="height: 100%;">
                         <!-- <div class="card-header"> -->
                         <img th:src="${producto.foto}" class="card-img-top" alt="Imagen del producto"
-                        style="object-fit: cover; height: 300px;">
+                            style="object-fit: cover; height: 300px;">
                         <!-- </div> -->
                         <div class="card-body">
                             <form th:action="@{/carrito}" method="POST">
@@ -45,18 +45,18 @@
                                 </h6>
 
                                 <button type="submit" class="btn btn-dark btn-sm">Añadir al carrito </button>
-                                <br/><br/>
-                                
+                                <br /><br />
+
                             </form>
                             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${producto.idProducto}"
-                                    class="btn btn-primary btn-sm">
-                                    <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
-                                </a>
-                                <a sec:authorize="hasRole('ROLE_ADMIN')"
-                                    th:href="@{/eliminar(idProducto=${producto.idProducto})}"
-                                    class="btn btn-primary btn-sm">
-                                    <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
-                                </a>
+                                class="btn btn-primary btn-sm">
+                                <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
+                            </a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')"
+                                th:href="@{/eliminar(idProducto=${producto.idProducto})}"
+                                class="btn btn-primary btn-sm">
+                                <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
+                            </a>
                         </div>
                     </div>
                 </div>
