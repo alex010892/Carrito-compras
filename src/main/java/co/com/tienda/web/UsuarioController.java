@@ -98,4 +98,10 @@ public class UsuarioController {
         model.addAttribute("usuarios", usuarioService.encontrarUsuarios());
         return "usuarios";
     }
+
+    @GetMapping("/ordenes")
+    public String ordenes(Model model){
+        model.addAttribute("ordenes", ordenService.findAll());
+        return "ordenes";
+    }
 }
