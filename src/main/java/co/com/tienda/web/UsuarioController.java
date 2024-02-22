@@ -17,6 +17,7 @@ import co.com.tienda.domain.DetalleOrden;
 import co.com.tienda.domain.Orden;
 import co.com.tienda.domain.Rol;
 import co.com.tienda.domain.Usuario;
+import co.com.tienda.servicio.IDetalleOrdenService;
 import co.com.tienda.servicio.IOrdenService;
 import co.com.tienda.servicio.IRolService;
 import co.com.tienda.servicio.IUsuarioService;
@@ -33,6 +34,9 @@ public class UsuarioController {
 
     @Autowired
     private IOrdenService ordenService;
+
+    @Autowired
+    private IDetalleOrdenService detalleOrdenService;
 
     List<Rol> roles = new ArrayList<Rol>();
 
@@ -103,5 +107,13 @@ public class UsuarioController {
     public String ordenes(Model model){
         model.addAttribute("ordenes", ordenService.findAll());
         return "ordenes";
+    }
+
+    @GetMapping("/detalleorden/{id}")
+    public String detalle(Model model, @PathVariable Integer id){
+        Orden orden = ordenService.findById(id).get();
+        //Optional<DetalleOrden> detalle = detalleOrdenService.findById(id);
+        model.addAttribute("detalleorden",orden.getDetalle());
+        return "detalleorden";
     }
 }
