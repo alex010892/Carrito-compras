@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,6 +62,10 @@ public class UsuarioController {
         Rol rol = new Rol();
         rol.setNombrerol(usuario.getNombrerol());
 
+        // Encripta el password recibido
+        String passwordEncriptado = encriptarPassword(usuario.getPassword());
+        usuario.setPassword(passwordEncriptado);
+
         // Establecer la relación entre Usuario y Rol (si es necesario)
         // usuario.setRol(rol); 
 
@@ -115,5 +120,11 @@ public class UsuarioController {
         //Optional<DetalleOrden> detalle = detalleOrdenService.findById(id);
         model.addAttribute("detalleorden",orden.getDetalle());
         return "detalleorden";
+    }
+
+    // Método para encriptar el password
+    private String encriptarPassword(String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder.encode(password);
     }
 }
